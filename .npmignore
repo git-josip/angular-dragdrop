@@ -1,0 +1,11 @@
+.*
+*.iml
+idea/
+*.zip
+*.tgz
+css/
+js/
+demo/
+node_modules/
+Gulpfile.js
+bower.json
