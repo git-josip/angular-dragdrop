@@ -22,7 +22,7 @@
         return;
     }
 
-    if (window.jQuery && (-1 === window.jQuery.event.props.indexOf('dataTransfer'))) {
+    if (window.jQuery && window.jQuery.event.props && (-1 === window.jQuery.event.props.indexOf('dataTransfer'))) {
         window.jQuery.event.props.push('dataTransfer');
     }
 
