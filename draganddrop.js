@@ -7,12 +7,12 @@
 
     function determineEffectAllowed(e) {
         // Chrome doesn't set dropEffect, so we have to work it out ourselves
-        if (e.dataTransfer && e.dataTransfer.dropEffect === 'none') {
-            if (e.dataTransfer.effectAllowed === 'copy' ||
-                e.dataTransfer.effectAllowed === 'move') {
-                e.dataTransfer.dropEffect = e.dataTransfer.effectAllowed;
-            } else if (e.dataTransfer.effectAllowed === 'copyMove' || e.dataTransfer.effectAllowed === 'copymove') {
-                e.dataTransfer.dropEffect = e.ctrlKey ? 'copy' : 'move';
+        if (e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.dropEffect === 'none') {
+            if (e.originalEvent.dataTransfer.effectAllowed === 'copy' ||
+                e.originalEvent.dataTransfer.effectAllowed === 'move') {
+                eoriginalEvent..dataTransfer.dropEffect = e.originalEvent.dataTransfer.effectAllowed;
+            } else if (eoriginalEvent..dataTransfer.effectAllowed === 'copyMove' || e.originalEvent.dataTransfer.effectAllowed === 'copymove') {
+                e.originalEvent.dataTransfer.dropEffect = e.ctrlKey ? 'copy' : 'move';
             }
         }
     }
@@ -69,7 +69,7 @@
 
                 determineEffectAllowed(e);
 
-                if (e.dataTransfer && e.dataTransfer.dropEffect !== 'none') {
+                if (e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.dropEffect !== 'none') {
                     if (attrs.onDropSuccess) {
                         var onDropSuccessFn = $parse(attrs.onDropSuccess);
                         scope.$evalAsync(function() {
@@ -117,7 +117,7 @@
                                 if (dragImageParameters.image) {
                                     var xOffset = dragImageParameters.xOffset || 0,
                                         yOffset = dragImageParameters.yOffset || 0;
-                                    e.dataTransfer.setDragImage(dragImageParameters.image, xOffset, yOffset);
+                                    e.originalEvent.dataTransfer.setDragImage(dragImageParameters.image, xOffset, yOffset);
                                 }
                             }
                         });
@@ -126,8 +126,8 @@
                     var transferDataObject = {data: dragData, channel: sendChannel}
                     var transferDataText = angular.toJson(transferDataObject);
 
-                    e.dataTransfer.setData('text', transferDataText);
-                    e.dataTransfer.effectAllowed = 'copyMove';
+                    e.originalEvent.dataTransfer.setData('text', transferDataText);
+                    e.originalEvent.dataTransfer.effectAllowed = 'copyMove';
 
                     $rootScope.$broadcast('ANGULAR_DRAG_START', e, sendChannel, transferDataObject);
                 }
@@ -224,7 +224,7 @@
                     e.stopPropagation(); // Necessary. Allows us to drop.
                 }
 
-                var sendData = e.dataTransfer.getData('text');
+                var sendData = e.originalEvent.dataTransfer.getData('text');
                 sendData = angular.fromJson(sendData);
 
                 determineEffectAllowed(e);
@@ -254,7 +254,7 @@
                 if (e.stopPropagation) {
                     e.stopPropagation();
                 }
-                e.dataTransfer.dropEffect = 'none';
+                e.originalEvent.dataTransfer.dropEffect = 'none';
                 return false;
             }
 
