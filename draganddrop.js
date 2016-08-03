@@ -10,8 +10,8 @@
         if (e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.dropEffect === 'none') {
             if (e.originalEvent.dataTransfer.effectAllowed === 'copy' ||
                 e.originalEvent.dataTransfer.effectAllowed === 'move') {
-                eoriginalEvent..dataTransfer.dropEffect = e.originalEvent.dataTransfer.effectAllowed;
-            } else if (eoriginalEvent..dataTransfer.effectAllowed === 'copyMove' || e.originalEvent.dataTransfer.effectAllowed === 'copymove') {
+                e.originalEvent.dataTransfer.dropEffect = e.originalEvent.dataTransfer.effectAllowed;
+            } else if (e.originalEvent.dataTransfer.effectAllowed === 'copyMove' || e.originalEvent.dataTransfer.effectAllowed === 'copymove') {
                 e.originalEvent.dataTransfer.dropEffect = e.ctrlKey ? 'copy' : 'move';
             }
         }
